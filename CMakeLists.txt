@@ -1214,6 +1214,7 @@ set(EXPECTED_DATA
   gui_icons.png
   gui_logo.png
   hud.png
+  infclass.png
   languages/arabic.txt
   languages/belarusian.txt
   languages/bosnian.txt
