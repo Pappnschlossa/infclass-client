@@ -31,6 +31,7 @@
 #include "race.h"
 #include "render.h"
 
+#include <game/classes.h>
 #include <game/damage_type.h>
 #include <game/localization.h>
 #include <game/version.h>
@@ -2658,6 +2659,9 @@ void CGameClient::ProcessInfClassPlayerInfo(int ClientID, const CNetObj_InfClass
 	int Skin = -1;
 	switch(pClient->m_InfClassPlayerClass)
 	{
+	case PLAYERCLASS_NINJA:
+		Skin = m_Skins.Find("inf_ninja");
+		break;
 	default:
 		break;
 	}
