@@ -98,6 +98,7 @@ void CHud::OnInit()
 	m_FlagOffset = RenderTools()->QuadContainerAddSprite(m_HudQuadContainerIndex, 0.f, 0.f, 8.f, 16.f);
 
 	PreparePlayerStateQuads();
+	PrepareStatusIconQuads();
 
 	Graphics()->QuadContainerUpload(m_HudQuadContainerIndex);
 }
@@ -739,6 +740,23 @@ void CHud::PrepareAmmoHealthAndArmorQuads()
 	for(int i = 0; i < 10; ++i)
 		Array[i] = IGraphics::CQuadItem(x + i * 12, y + 12, 12, 12);
 	Graphics()->QuadContainerAddQuads(m_HudQuadContainerIndex, Array, 10);
+}
+
+void CHud::PrepareStatusIconQuads()
+{
+	float x = 5;
+	float y = 5;
+
+	y += 24 + 12;
+
+	IGraphics::CQuadItem Array[10];
+
+	int MaxStatusIcons = 4;
+	for(int i = 0; i < MaxStatusIcons; ++i)
+	{
+		Array[i] = IGraphics::CQuadItem(x + i * 24, y, g_Config.m_ClInfStatusSize, g_Config.m_ClInfStatusSize);
+	}
+	Graphics()->QuadContainerAddQuads(m_HudQuadContainerIndex, Array, MaxStatusIcons);
 }
 
 void CHud::RenderAmmoHealthAndArmor(const CNetObj_Character *pCharacter)
@@ -1489,6 +1507,37 @@ void CHud::RenderMovementInformation(const int ClientID)
 	}
 }
 
+void CHud::RenderStatusIcons(int ClientID)
+{
+	if(ClientID < 0)
+	{
+		return;
+	}
+
+	const CGameClient::CClientData *pClientData = &m_pClient->m_aClients[ClientID];
+	int InfclassPlayerFlags = pClientData->m_InfClassPlayerFlags;
+
+	// For some reason we still need the same offset for non sixup skins. Comment out for now:
+	// bool IsSixupGameSkin = GameClient()->m_GameSkin.IsSixup();
+	// int QuadOffsetSixup = (IsSixupGameSkin ? 10 : 0);
+	int QuadOffsetSixup = 10;
+
+	int QuadOffset = NUM_WEAPONS * 10 * 2 + 20 * 2 + QuadOffsetSixup + 20 + 10
+	// Cursors
+			+ NUM_WEAPONS
+	// Flags
+			+ 2
+			;
+
+	int UsedIcons = 0;
+	if(InfclassPlayerFlags & INFCLASS_PLAYER_FLAG_HOOK_PROTECTION_OFF)
+	{
+		Graphics()->TextureSet(GameClient()->m_InfclassSkin.m_SpriteStatusHookable);
+		Graphics()->RenderQuadContainer(m_HudQuadContainerIndex, QuadOffset + UsedIcons, 1);
+		++UsedIcons;
+	}
+}
+
 void CHud::RenderSpectatorHud()
 {
 	// draw the box
@@ -1543,6 +1592,7 @@ void CHud::OnRender()
 			if(g_Config.m_ClShowhudHealthAmmo && (!m_pClient->m_Snap.m_aCharacters[m_pClient->m_Snap.m_LocalClientID].m_HasExtendedData || !g_Config.m_ClDDRaceHud))
 			{
 				RenderAmmoHealthAndArmor(m_pClient->m_Snap.m_pLocalCharacter);
+				RenderStatusIcons(m_pClient->m_LocalIDs[g_Config.m_ClDummy]);
 			}
 			if(m_pClient->m_Snap.m_aCharacters[m_pClient->m_Snap.m_LocalClientID].m_HasExtendedData && g_Config.m_ClDDRaceHud)
 			{
@@ -1557,6 +1607,7 @@ void CHud::OnRender()
 			if(SpectatorID != SPEC_FREEVIEW && g_Config.m_ClShowhudHealthAmmo && (!m_pClient->m_Snap.m_aCharacters[SpectatorID].m_HasExtendedData || !g_Config.m_ClDDRaceHud))
 			{
 				RenderAmmoHealthAndArmor(&m_pClient->m_Snap.m_aCharacters[SpectatorID].m_Cur);
+				RenderStatusIcons(SpectatorID);
 			}
 			if(SpectatorID != SPEC_FREEVIEW && m_pClient->m_Snap.m_aCharacters[SpectatorID].m_HasExtendedData && g_Config.m_ClDDRaceHud)
 			{
