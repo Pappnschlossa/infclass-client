@@ -201,7 +201,9 @@ class CClient : public IClient, public CDemoPlayer::IListener
 	SHA256_DIGEST m_MapDetailsSha256;
 
 	char m_aDDNetInfoTmp[64];
+	char m_aInfclassInfoTmp[64];
 	std::shared_ptr<CHttpRequest> m_pDDNetInfoTask;
+	std::shared_ptr<CHttpRequest> m_pInfClassInfoTask;
 
 	// time
 	CSmoothTime m_GameTime[NUM_DUMMIES];
@@ -391,10 +393,15 @@ public:
 	void FinishMapDownload();
 
 	void RequestDDNetInfo() override;
+	void RequestInfclassInfo() override;
 	void ResetDDNetInfo();
+	void ResetInfclassInfo();
 	bool IsDDNetInfoChanged();
+	bool IsInfclassInfoChanged();
 	void FinishDDNetInfo();
+	void FinishInfclassInfo();
 	void LoadDDNetInfo();
+	void LoadInfclassInfo();
 
 	NETADDR ServerAddress() const override { return m_ServerAddress; }
 	const char *ConnectAddressString() const override { return m_aConnectAddressStr; }
