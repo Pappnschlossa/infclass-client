@@ -489,7 +489,11 @@ void CPlayers::RenderPlayer(
 			{
 				Graphics()->QuadsSetRotation(-pi / 2 + State.GetAttach()->m_Angle * pi * 2);
 			}
-			Graphics()->RenderQuadContainerAsSprite(m_WeaponEmoteQuadContainerIndex, QuadOffset, p.x, p.y);
+			bool HasWeapon = PlayerClass != PLAYERCLASS_BOOMER;
+			if(HasWeapon)
+			{
+				Graphics()->RenderQuadContainerAsSprite(m_WeaponEmoteQuadContainerIndex, QuadOffset, p.x, p.y);
+			}
 		}
 		else if(Player.m_Weapon == WEAPON_NINJA)
 		{
