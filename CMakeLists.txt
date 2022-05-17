@@ -1718,6 +1718,7 @@ set_src(ENGINE_SHARED GLOB_RECURSE src/engine/shared
   huffman.h
   image_manipulation.cpp
   image_manipulation.h
+  infc_config_variables.h
   jobs.cpp
   jobs.h
   json.cpp

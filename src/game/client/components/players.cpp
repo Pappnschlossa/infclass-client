@@ -489,7 +489,11 @@ void CPlayers::RenderPlayer(
 			{
 				Graphics()->QuadsSetRotation(-pi / 2 + State.GetAttach()->m_Angle * pi * 2);
 			}
-			bool HasWeapon = PlayerClass != PLAYERCLASS_BOOMER;
+			bool HasWeapon = true;
+			if(PlayerClass == PLAYERCLASS_BOOMER)
+			{
+				HasWeapon = Config()->m_InfcShowBoomerWeapon;
+			}
 			if(HasWeapon)
 			{
 				Graphics()->RenderQuadContainerAsSprite(m_WeaponEmoteQuadContainerIndex, QuadOffset, p.x, p.y);
