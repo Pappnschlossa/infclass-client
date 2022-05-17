@@ -537,6 +537,7 @@ void CGameClient::OnReset()
 	m_Tuning[g_Config.m_ClDummy] = CTuningParams();
 
 	m_InfClassHeroGiftTick = -1;
+	m_InfclassDataVersion = 0;
 
 	m_Teams.Reset();
 	m_DDRaceMsgSent[0] = false;
@@ -2733,6 +2734,7 @@ void CGameClient::ProcessInfClassClassInfo(int ClientID, const CNetObj_InfClassC
 
 void CGameClient::ProcessInfClassGameInfo(const CNetObj_InfClassGameInfo *pGameInfo)
 {
+	m_InfclassDataVersion = pGameInfo->m_Version;
 	m_TimeLimitInSeconds = pGameInfo->m_TimeLimitInSeconds;
 	m_InfClassHeroGiftTick = pGameInfo->m_HeroGiftTick;
 }
