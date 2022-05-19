@@ -263,7 +263,6 @@ public:
 	void SetWeaponGot(int Type, bool Value) { m_aWeapons[Type].m_Got = Value; }
 	int GetWeaponAmmo(int Type) { return m_aWeapons[Type].m_Ammo; }
 	void SetWeaponAmmo(int Type, int Value) { m_aWeapons[Type].m_Ammo = Value; }
-	bool IsAlive() { return m_Alive; }
 	void SetNinjaActivationDir(vec2 ActivationDir) { m_Ninja.m_ActivationDir = ActivationDir; }
 	void SetNinjaActivationTick(int ActivationTick) { m_Ninja.m_ActivationTick = ActivationTick; }
 	void SetNinjaCurrentMoveTime(int CurrentMoveTime) { m_Ninja.m_CurrentMoveTime = CurrentMoveTime; }
