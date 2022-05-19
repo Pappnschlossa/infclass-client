@@ -7,8 +7,6 @@
 #include <game/server/score.h>
 #include <game/teamscore.h>
 
-#include <utility>
-
 class CGameTeams
 {
 	// `m_TeeStarted` is used to keep track whether a given tee has hit the
