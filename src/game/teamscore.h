@@ -26,8 +26,12 @@ class CTeamsCore
 	int m_Team[MAX_CLIENTS];
 	bool m_IsSolo[MAX_CLIENTS];
 
+	bool m_IsInfected[MAX_CLIENTS];
+	bool m_IsProtected[MAX_CLIENTS];
+
 public:
 	bool m_IsDDRace16;
+	bool m_IsInfclass;
 
 	CTeamsCore();
 
@@ -51,6 +55,17 @@ public:
 		if(ClientID < 0 || ClientID >= MAX_CLIENTS)
 			return false;
 		return m_IsSolo[ClientID];
+	}
+
+	void SetInfected(int ClientID, bool Value)
+	{
+		dbg_assert(ClientID >= 0 && ClientID < MAX_CLIENTS, "Invalid client id");
+		m_IsInfected[ClientID] = Value;
+	}
+	void SetProtected(int ClientID, bool Value)
+	{
+		dbg_assert(ClientID >= 0 && ClientID < MAX_CLIENTS, "Invalid client id");
+		m_IsProtected[ClientID] = Value;
 	}
 };
 
