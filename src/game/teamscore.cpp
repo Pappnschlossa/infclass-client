@@ -33,6 +33,18 @@ bool CTeamsCore::CanKeepHook(int ClientID1, int ClientID2) const
 
 bool CTeamsCore::CanCollide(int ClientID1, int ClientID2) const
 {
+	if(m_IsInfclass)
+	{
+		if(m_IsInfected[ClientID1] != m_IsInfected[ClientID2])
+			return true;
+
+		// Only infected can collide
+		if(!m_IsInfected[ClientID1])
+			return false;
+
+		return !m_IsProtected[ClientID1] && !m_IsProtected[ClientID2];
+	}
+
 	if(m_Team[ClientID1] == (m_IsDDRace16 ? VANILLA_TEAM_SUPER : TEAM_SUPER) || m_Team[ClientID2] == (m_IsDDRace16 ? VANILLA_TEAM_SUPER : TEAM_SUPER) || ClientID1 == ClientID2)
 		return true;
 	if(m_IsSolo[ClientID1] || m_IsSolo[ClientID2])
@@ -43,6 +55,7 @@ bool CTeamsCore::CanCollide(int ClientID1, int ClientID2) const
 void CTeamsCore::Reset()
 {
 	m_IsDDRace16 = false;
+	m_IsInfclass = false;
 
 	for(int i = 0; i < MAX_CLIENTS; ++i)
 	{
@@ -51,5 +64,8 @@ void CTeamsCore::Reset()
 		else
 			m_Team[i] = TEAM_FLOCK;
 		m_IsSolo[i] = false;
+
+		m_IsInfected[i] = false;
+		m_IsProtected[i] = false;
 	}
 }
