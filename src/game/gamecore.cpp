@@ -265,7 +265,7 @@ void CCharacterCore::Tick(bool UseInput)
 			for(int i = 0; i < MAX_CLIENTS; i++)
 			{
 				CCharacterCore *pCharCore = m_pWorld->m_apCharacters[i];
-				if(!pCharCore || pCharCore == this || (!(m_Super || pCharCore->m_Super) && ((m_Id != -1 && !m_pTeams->CanCollide(i, m_Id)) || pCharCore->m_Solo || m_Solo)))
+				if(!pCharCore || pCharCore == this || (!(m_Super || pCharCore->m_Super) && ((m_Id != -1 && !m_pTeams->CanHook(m_Id, i)) || pCharCore->m_Solo || m_Solo)))
 					continue;
 
 				vec2 ClosestPoint;
@@ -381,7 +381,7 @@ void CCharacterCore::Tick(bool UseInput)
 			//player *p = (player*)ent;
 			//if(pCharCore == this) // || !(p->flags&FLAG_ALIVE)
 
-			if(pCharCore == this || (m_Id != -1 && !m_pTeams->CanCollide(m_Id, i)))
+			if(pCharCore == this || (m_Id != -1 && !m_pTeams->CanHook(m_Id, i)))
 				continue; // make sure that we don't nudge our self
 
 			if(!(m_Super || pCharCore->m_Super) && (m_Solo || pCharCore->m_Solo))
@@ -395,7 +395,7 @@ void CCharacterCore::Tick(bool UseInput)
 
 				bool CanCollide = (m_Super || pCharCore->m_Super) || (pCharCore->m_Collision && m_Collision && !m_NoCollision && !pCharCore->m_NoCollision && m_Tuning.m_PlayerCollision);
 
-				if(CanCollide && Distance < sc_PhysicalSize * 1.25f && Distance > 0.0f)
+				if(CanCollide && (m_Id == -1 || m_pTeams->CanCollide(m_Id, i)) && Distance < sc_PhysicalSize * 1.25f && Distance > 0.0f)
 				{
 					float a = (sc_PhysicalSize * 1.45f - Distance);
 					float Velocity = 0.5f;
