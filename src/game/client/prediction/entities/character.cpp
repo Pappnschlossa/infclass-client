@@ -55,6 +55,17 @@ void CCharacter::HandleJetpack()
 	if(m_Jetpack && m_Core.m_ActiveWeapon == WEAPON_GUN)
 		FullAuto = true;
 
+	if(GameWorld()->m_WorldConfig.m_IsInfClass)
+	{
+		m_Jetpack =  m_InfClassClass == PLAYERCLASS_MERCENARY;
+		m_Core.m_Jetpack = m_Jetpack;
+
+		if(m_Core.m_ActiveWeapon == WEAPON_GUN)
+		{
+			FullAuto = true;
+		}
+	}
+
 	// check if we gonna fire
 	bool WillFire = false;
 	if(CountInput(m_LatestPrevInput.m_Fire, m_LatestInput.m_Fire).m_Presses)
