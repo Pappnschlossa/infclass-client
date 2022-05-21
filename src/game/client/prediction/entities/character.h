@@ -147,6 +147,9 @@ public:
 	CCharacter() { m_Alive = false; }
 	void SetTuneZone(int Zone);
 
+	int GetPlayerClass() const { return m_InfClassClass; }
+	int m_InfClassClass;
+
 private:
 	// weapon info
 	int m_aHitObjects[10];
