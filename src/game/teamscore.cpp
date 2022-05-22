@@ -35,6 +35,9 @@ bool CTeamsCore::CanCollide(int ClientID1, int ClientID2) const
 {
 	if(m_IsInfclass)
 	{
+		if(ClientID1 == ClientID2)
+			return true;
+
 		if(m_IsInfected[ClientID1] != m_IsInfected[ClientID2])
 			return true;
 
