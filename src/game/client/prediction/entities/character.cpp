@@ -1337,6 +1337,90 @@ void CCharacter::Read(CNetObj_Character *pChar, CNetObj_DDNetCharacter *pExtende
 		}
 	}
 
+	if(GameWorld()->m_WorldConfig.m_IsInfClass)
+	{
+		switch(GetPlayerClass())
+		{
+		case PLAYERCLASS_MERCENARY:
+			m_aWeapons[WEAPON_HAMMER].m_Got = true;
+			m_aWeapons[WEAPON_GUN].m_Got = true;
+			m_aWeapons[WEAPON_SHOTGUN].m_Got = false;
+			m_aWeapons[WEAPON_GRENADE].m_Got = true;
+			m_aWeapons[WEAPON_LASER].m_Got = false; // Pessimistic for MercBombsEnabled
+			break;
+		case PLAYERCLASS_MEDIC:
+			m_aWeapons[WEAPON_HAMMER].m_Got = true;
+			m_aWeapons[WEAPON_GUN].m_Got = true;
+			m_aWeapons[WEAPON_SHOTGUN].m_Got = false;
+			m_aWeapons[WEAPON_GRENADE].m_Got = true;
+			m_aWeapons[WEAPON_LASER].m_Got = true;
+			break;
+		case PLAYERCLASS_HERO:
+			m_aWeapons[WEAPON_HAMMER].m_Got = false; // Pessimistic for TurretsEnabled
+			m_aWeapons[WEAPON_GUN].m_Got = true;
+			m_aWeapons[WEAPON_SHOTGUN].m_Got = true;
+			m_aWeapons[WEAPON_GRENADE].m_Got = true;
+			m_aWeapons[WEAPON_LASER].m_Got = true;
+			break;
+		case PLAYERCLASS_ENGINEER:
+			m_aWeapons[WEAPON_HAMMER].m_Got = true;
+			m_aWeapons[WEAPON_GUN].m_Got = true;
+			m_aWeapons[WEAPON_SHOTGUN].m_Got = false;
+			m_aWeapons[WEAPON_GRENADE].m_Got = false;
+			m_aWeapons[WEAPON_LASER].m_Got = true;
+			break;
+		case PLAYERCLASS_SOLDIER:
+			m_aWeapons[WEAPON_HAMMER].m_Got = true;
+			m_aWeapons[WEAPON_GUN].m_Got = true;
+			m_aWeapons[WEAPON_SHOTGUN].m_Got = false;
+			m_aWeapons[WEAPON_GRENADE].m_Got = true;
+			m_aWeapons[WEAPON_LASER].m_Got = false;
+			break;
+		case PLAYERCLASS_NINJA:
+			m_aWeapons[WEAPON_HAMMER].m_Got = true;
+			m_aWeapons[WEAPON_GUN].m_Got = true;
+			m_aWeapons[WEAPON_SHOTGUN].m_Got = false;
+			m_aWeapons[WEAPON_GRENADE].m_Got = true;
+			m_aWeapons[WEAPON_LASER].m_Got = true;
+			break;
+		case PLAYERCLASS_SNIPER:
+			m_aWeapons[WEAPON_HAMMER].m_Got = true;
+			m_aWeapons[WEAPON_GUN].m_Got = true;
+			m_aWeapons[WEAPON_SHOTGUN].m_Got = false;
+			m_aWeapons[WEAPON_GRENADE].m_Got = false;
+			m_aWeapons[WEAPON_LASER].m_Got = true;
+			break;
+		case PLAYERCLASS_SCIENTIST:
+			m_aWeapons[WEAPON_HAMMER].m_Got = true;
+			m_aWeapons[WEAPON_GUN].m_Got = true;
+			m_aWeapons[WEAPON_SHOTGUN].m_Got = false;
+			m_aWeapons[WEAPON_GRENADE].m_Got = true;
+			m_aWeapons[WEAPON_LASER].m_Got = true;
+			break;
+		case PLAYERCLASS_BIOLOGIST:
+			m_aWeapons[WEAPON_HAMMER].m_Got = true;
+			m_aWeapons[WEAPON_GUN].m_Got = true;
+			m_aWeapons[WEAPON_SHOTGUN].m_Got = true;
+			m_aWeapons[WEAPON_GRENADE].m_Got = false;
+			m_aWeapons[WEAPON_LASER].m_Got = true;
+			break;
+		case PLAYERCLASS_LOOPER:
+			m_aWeapons[WEAPON_HAMMER].m_Got = true;
+			m_aWeapons[WEAPON_GUN].m_Got = false;
+			m_aWeapons[WEAPON_SHOTGUN].m_Got = false;
+			m_aWeapons[WEAPON_GRENADE].m_Got = true;
+			m_aWeapons[WEAPON_LASER].m_Got = true;
+			break;
+		default:
+			m_aWeapons[WEAPON_HAMMER].m_Got = true;
+			m_aWeapons[WEAPON_GUN].m_Got = false;
+			m_aWeapons[WEAPON_SHOTGUN].m_Got = false;
+			m_aWeapons[WEAPON_GRENADE].m_Got = false;
+			m_aWeapons[WEAPON_LASER].m_Got = false;
+			break;
+		}
+	}
+
 	vec2 PosBefore = m_Pos;
 	m_Pos = m_Core.m_Pos;
 
