@@ -2259,6 +2259,8 @@ if(SERVER)
     register.h
     server.cpp
     server.h
+    server_logger.cpp
+    server_logger.h
     sql_string_helpers.cpp
     sql_string_helpers.h
     upnp.cpp
@@ -2302,6 +2304,7 @@ if(SERVER)
     gamemodes/DDRace.h
     gameworld.cpp
     gameworld.h
+    main.cpp
     player.cpp
     player.h
     save.cpp
