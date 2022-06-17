@@ -1452,6 +1452,12 @@ set(EXPECTED_DATA
   skins/oldschool.png
   skins/penguin.png
   skins/pinky.png
+  skins/pvz_biologist.png
+  skins/pvz_default.png
+  skins/pvz_engineer.png
+  skins/pvz_hero.png
+  skins/pvz_looper.png
+  skins/pvz_medic.png
   skins/random.png
   skins/redbopp.png
   skins/redstripe.png
