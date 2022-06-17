@@ -314,3 +314,5 @@ DDNet is available in the [Phoronix Test Suite](https://openbenchmarking.org/tes
 ```bash
 $ phoronix-test-suite benchmark ddnet
 ```
+
+PvZ forever! (Kaffeine forced me to say that)
