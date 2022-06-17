@@ -2666,13 +2666,71 @@ void CGameClient::ProcessInfClassPlayerInfo(CClientData *pClient, const CNetObj_
 	int Skin = -1;
 	switch(pClient->m_InfClassPlayerClass)
 	{
+	case PLAYERCLASS_ENGINEER:
+		Skin = m_Skins.Find("pvz_engineer");
+		break;
+	case PLAYERCLASS_SCIENTIST:
+		Skin = m_Skins.Find("pvz_scientist");
+		break;
+	case PLAYERCLASS_LOOPER:
+		Skin = m_Skins.Find("pvz_looper");
+		break;
+	case PLAYERCLASS_MEDIC:
+		Skin = m_Skins.Find("pvz_medic");
+		break;
+	case PLAYERCLASS_BIOLOGIST:
+		Skin = m_Skins.Find("pvz_biologist");
+		break;
+	case PLAYERCLASS_SOLDIER:
+		Skin = m_Skins.Find("pvz_soldier");
+		break;
+	case PLAYERCLASS_MERCENARY:
+		Skin = m_Skins.Find("pvz_mercenary");
+		break;
+	case PLAYERCLASS_SNIPER:
+		Skin = m_Skins.Find("pvz_sniper");
+		break;
+	case PLAYERCLASS_HERO:
+		Skin = m_Skins.Find("pvz_hero");
+		break;
 	case PLAYERCLASS_NINJA:
-		Skin = m_Skins.Find("inf_ninja");
+		Skin = m_Skins.Find("pvz_ninja");
+		break;
+	case PLAYERCLASS_SMOKER:
+		Skin = m_Skins.Find("pvz_smoker");
+		break;
+	case PLAYERCLASS_HUNTER:
+		Skin = m_Skins.Find("pvz_hunter");
+		break;
+	case PLAYERCLASS_BAT:
+		Skin = m_Skins.Find("pvz_bat");
+		break;
+	case PLAYERCLASS_BOOMER:
+		Skin = m_Skins.Find("pvz_boomer");
 		break;
 	case PLAYERCLASS_GHOST:
-		Skin = m_Skins.Find("ghost");
+		Skin = m_Skins.Find("pvz_ghost");
+		break;
+	case PLAYERCLASS_SPIDER:
+		Skin = m_Skins.Find("pvz_spider");
+		break;
+	case PLAYERCLASS_GHOUL:
+		Skin = m_Skins.Find("pvz_ghoul");
+		break;
+	case PLAYERCLASS_SLUG:
+		Skin = m_Skins.Find("pvz_slug");
+		break;
+	case PLAYERCLASS_VOODOO:
+		Skin = m_Skins.Find("pvz_voodoo");
+		break;
+	case PLAYERCLASS_WITCH:
+		Skin = m_Skins.Find("pvz_witch");
+		break;
+	case PLAYERCLASS_UNDEAD:
+		Skin = m_Skins.Find("pvz_undead");
 		break;
 	default:
+		Skin = m_Skins.Find("pvz_default");
 		break;
 	}
 
